@@ -1,62 +1,35 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, change } from 'redux-form';
 
-import { Form } from 'reactstrap';
+import ProfileForm from '../Profile/ProfileForm';
 
-import Card, { CardHeader, CardFooter, CardBody } from '../../components/Card';
-import Text from '../../components/Text';
-import Number from '../../components/Number';
-import Email from '../../components/Email';
-import CPF from '../../components/CPF';
-import Select from '../../components/Select';
-import UF from '../../components/UF';
-import Phone from '../../components/Phone';
-import Endereco from '../../components/Endereco';
+class Inicio extends Component {
 
-class Showcase extends Component {
-
-    constructor(props) {
-        super(props);
-        this.carregarEndereco = this.carregarEndereco.bind(this);
-    }
-
-    carregarEndereco(address) {
-        if(address) {
-            this.props.dispatch(change(this.props.form, 'logradouro', address.logradouro));
-            this.props.dispatch(change(this.props.form, 'bairro', address.bairro));
-            this.props.dispatch(change(this.props.form, 'cidade', address.cidade));
-            this.props.dispatch(change(this.props.form, 'uf', address.uf));
-        }
+    doSubmit(values) {
     }
 
     render() {
         return (
         <div className="container">
-            <div className="row justify-content-center">
 
-                <div className="col-md-8 offset-md-4">
-                    <Form>
-                    <h3>Showcase</h3>
-                    </Form>
+            <div className="row justify-content-center page-header text-center">
+                <div className="col-sm-12 col-md-8">
+                    <h1><img src="img/logo-II-workshop-eng-automotiva-texto-horizontal.png" className="header-image"/></h1>
+                    <br/>
+                    <p>Para garantir sua participação, basta fazer sua inscrição abaixo:</p>
                 </div>
+            </div>
 
+            <div className="row justify-content-center">
+                <div className="col-sm-12 col-md-8">
+                    <ProfileForm doSubmit={this.doSubmit}/>
+                </div>
+            </div>
+
+            <div className="row justify-content-center page-header">
             </div>
         </div>
         );
     }
 }
 
-Showcase = reduxForm({ form: "ShowcaseForm" })(Showcase);
-
-const mapStateToProps = (state) => {
-    return {
-        ...state.showcaseReducer
-    }
-};
-
-Showcase = connect( 
-    mapStateToProps
-)(Showcase);
-
-export default Showcase;
+export default Inicio;

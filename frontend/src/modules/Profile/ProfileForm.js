@@ -132,8 +132,6 @@ class ProfileForm extends Component {
         return (
             <Form onSubmit={handleSubmit(this.props.save)}>
 
-                <h2><Intl str='meu-perfil'></Intl></h2>
-
                 <Card>
                   <CardHeader><Intl str='informacoes-pessoais'></Intl></CardHeader>
                   <CardBody>
@@ -168,7 +166,7 @@ class ProfileForm extends Component {
                 <FieldArray name="emails" component={renderEmails} />
 
                 <Button type="submit" color="primary" disabled={invalid || submitting}><Intl str='salvar'></Intl></Button>
-                <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)}><Intl str='desfazer'></Intl></Button>
+                <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)}><Intl str='limpar'></Intl></Button>
 
             </Form>
         );

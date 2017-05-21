@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import axios from "axios";
 
 import App from './app/App';
-import { login } from './app/App.actions';
 import reducers from './app/App.reducers';
 
 import { changeLanguage } from './components/Intl/Intl.actions';

@@ -11,6 +11,7 @@
   "dependencies": {
     "chart.js": "2.5.0",
     "axios": "0.16.1",
+    "keycloak-js": "3.1.0",
     "react": "15.4.2",
     "react-addons-css-transition-group": "15.4.2",
     "react-addons-transition-group": "15.4.2",
@@ -22,6 +23,8 @@
     "react-bootstrap": "0.31.0",
     "reapop": "1.0.0",
     "reapop-theme-bootstrap": "0.3.0",
+    "bootstrap": "3.3.7",
+    "font-awesome": "4.6.1",
     "redux": "3.6.0",
     "redux-form": "6.5.0",
     "redux-thunk": "2.2.0",
