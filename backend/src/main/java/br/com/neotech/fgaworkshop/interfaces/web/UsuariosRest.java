@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.neotech.fgaworkshop.domain.model.Usuario;
 import br.com.neotech.fgaworkshop.domain.service.UsuariosService;
-import br.com.neotech.fgaworkshop.infraestructure.dto.UsuarioDTO;
 import br.com.neotech.util.infraestructure.web.RestFullEndpoint;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuariosRest extends RestFullEndpoint<Usuario, Long, UsuarioDTO> {
+public class UsuariosRest extends RestFullEndpoint<Usuario, Long> {
 
     @Autowired
     public UsuariosRest(UsuariosService service) {
@@ -23,8 +22,9 @@ public class UsuariosRest extends RestFullEndpoint<Usuario, Long, UsuarioDTO> {
     }
 
     @RequestMapping(method = RequestMethod.GET, path="/login")
-    public ResponseEntity<UsuarioDTO> getByLogin(@RequestParam("login") String login) {
-        UsuarioDTO u = ((UsuariosService)service).findByLogin(login);
+    public ResponseEntity<Usuario> getByLogin(@RequestParam("login") String login) {
+        Usuario u = ((UsuariosService)service).findByLogin(login);
+
         if(u != null) {
             return new ResponseEntity<>(u, HttpStatus.OK);
         } else {

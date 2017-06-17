@@ -52,6 +52,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>${springboot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${springboot.version}</version>
             <scope>test</scope>
@@ -69,11 +74,11 @@
             <artifactId>keycloak-tomcat8-adapter</artifactId>
             <version>${keycloak.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-spring-boot-adapter</artifactId>
-            <version>${keycloak.version}</version>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.keycloak</groupId> -->
+<!--             <artifactId>keycloak-spring-boot-adapter</artifactId> -->
+<!--             <version>${keycloak.version}</version> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

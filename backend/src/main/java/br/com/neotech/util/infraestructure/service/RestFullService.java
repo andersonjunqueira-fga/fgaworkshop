@@ -1,19 +1,17 @@
 package br.com.neotech.util.infraestructure.service;
 
-import static java.util.stream.Collectors.toList;
-
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-public class RestFullService<E, PK extends Serializable, DTO extends DefaultDTO<PK>> {
+import br.com.neotech.util.infraestructure.exception.NegocioException;
+
+public class RestFullService<E, PK extends Serializable> {
 
     private Class<E> modelClass;
-    private Class<DTO> dtoClass;
     protected final JpaRepository<E, PK> repository;
 
     @SuppressWarnings("unchecked")
@@ -22,10 +20,6 @@ public class RestFullService<E, PK extends Serializable, DTO extends DefaultDTO<
             final ParameterizedType type = (ParameterizedType)getClass().getGenericSuperclass();
             modelClass = (Class<E>)type.getActualTypeArguments()[0];
         }
-        if(dtoClass == null) {
-            final ParameterizedType type = (ParameterizedType)getClass().getGenericSuperclass();
-            dtoClass = (Class<DTO>)type.getActualTypeArguments()[2];
-        }
     }
 
     protected RestFullService(JpaRepository<E, PK> repository) {
@@ -33,70 +27,27 @@ public class RestFullService<E, PK extends Serializable, DTO extends DefaultDTO<
         loadTypes();
     }
 
-    public List<DTO> findAll() {
-        List<E> found = repository.findAll();
-        return convertToDTOs(found);
+    public List<E> findAll() throws NegocioException  {
+        return repository.findAll();
     }
 
-    public DTO findById(PK id) {
-        E found = repository.findOne(id);
-        return convertToDTO(found);
+    public E findById(PK id) throws NegocioException  {
+        return repository.findOne(id);
     }
 
     @Transactional
-    public void delete(PK id) {
+    public void delete(PK id) throws NegocioException  {
         repository.delete(id);
     }
 
     @Transactional
-    public DTO create(DTO dto) {
-        E persisted = convertToModel(dto);
-        persisted = repository.save(persisted);
-        return convertToDTO(persisted);
+    public E create(E e) throws NegocioException {
+        return repository.save(e);
     }
 
     @Transactional
-    public DTO update(DTO dto) {
-        E updated = repository.findOne(dto.getId());
-        updateModel(updated, dto);
-        updated = repository.save(updated);
-        return convertToDTO(updated);
-    }
-
-    public List<DTO> convertToDTOs(List<E> models) {
-        return models.stream()
-            .map(this::convertToDTO)
-            .collect(toList());
-    }
-
-    public DTO convertToDTO(E model) {
-        try {
-            DTO dto = dtoClass.newInstance();
-            BeanUtils.copyProperties(model, dto);
-            return dto;
-        } catch(Exception ex) {
-            return null;
-        }
-    }
-
-    public E convertToModel(DTO dto) {
-        try {
-            E m = modelClass.newInstance();
-            BeanUtils.copyProperties(dto, m);
-            return m;
-        } catch(Exception ex) {
-            return null;
-        }
-    }
-
-    public List<E> convertToModels(List<DTO> dtos) {
-        return dtos.stream()
-            .map(this::convertToModel)
-            .collect(toList());
-    }
-
-    public void updateModel(E model, DTO dto) {
-        BeanUtils.copyProperties(dto, model, "id");
+    public E update(E e) throws NegocioException  {
+        return repository.save(e);
     }
 
 }

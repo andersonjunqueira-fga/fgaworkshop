@@ -21,7 +21,8 @@ class Select extends Component {
             help: this.props.help,
             options: ops,
             required: this.props.required,
-            formGroupClass: "form-group--select"
+            formGroupClass: "form-group--select",
+            onChange: this.props.onChange
         };
 
         return (
@@ -36,7 +37,8 @@ Select.propTypes = {
     help: PropTypes.string,
     required: PropTypes.bool,
     undefinedOption: PropTypes.bool,
-    options: PropTypes.arrayOf(PropTypes.object)
+    options: PropTypes.arrayOf(PropTypes.object),
+    onChange: PropTypes.func
 }
 
 Select.defaultProps = {

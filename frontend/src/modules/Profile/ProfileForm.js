@@ -104,9 +104,19 @@ class ProfileForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            initialized: false
+            initialized: false,
+            cursos: [
+                { value: "aero", text: translate("eng-aeroespacial")},
+                { value: "auto", text: translate("eng-automotiva")},
+                { value: "soft", text: translate("eng-software")},
+                { value: "ener", text: translate("eng-energia")},
+                { value: "elet", text: translate("eng-eletronica")},
+                { value: "outro", text: translate("outro")}
+            ],
+            showOutros: false
         }
         this.atualizaEndereco = this.atualizaEndereco.bind(this);
+        this.onCursoChange = this.onCursoChange.bind(this);
     }
 
     componentDidUpdate() {
@@ -127,48 +137,64 @@ class ProfileForm extends Component {
         }
     }
 
+    onCursoChange(event, newValue, previousValue) {
+        this.setState(Object.assign(this.state, { showOutros: newValue == "outro" }));
+    }
+
     render() {
         const { handleSubmit, pristine, reset, submitting, invalid } = this.props;
         return (
-            <Form onSubmit={handleSubmit(this.props.save)}>
+        <Form onSubmit={handleSubmit(this.props.save)}>
 
-                <Card>
-                  <CardHeader><Intl str='informacoes-pessoais'></Intl></CardHeader>
-                  <CardBody>
+            <Card>
+                <CardHeader><Intl str='informacoes-pessoais'></Intl></CardHeader>
+                <CardBody>
 
-                      <Row>
+                    <Row>
                         <Col xs={12} md={12}>
-                          <Text name="nome" label={<Intl str='nome-completo'></Intl>} maxLength={100} required={true}/>
+                            <Text name="nome" label={<Intl str='nome-completo'></Intl>} maxLength={100} required={true}/>
                         </Col>
-                      </Row>
+                    </Row>
 
-                      <Row>
+                    <Row>
                         <Col xs={12} md={3}>
-                          <CPF name="cpf" label={<Intl str='cpf'></Intl>} />
+                            <CPF name="cpf" label={<Intl str='cpf'></Intl>} />
                         </Col>
                         <Col xs={12} md={3}>
-                          <Text name="rg" label={<Intl str='rg'></Intl>} maxLength={20}/>
+                            <Text name="rg" label={<Intl str='rg'></Intl>} maxLength={20}/>
                         </Col>
                         <Col xs={6} md={3}>
-                          <Text name="orgaoExpedidor" label={<Intl str='orgao-expedidor'></Intl>} maxLength={10}/>
+                            <Text name="orgaoExpedidor" label={<Intl str='orgao-expedidor'></Intl>} maxLength={10}/>
                         </Col>
                         <Col xs={6} md={3}>
-                          <UF name="ufExpedicao" label={<Intl str='uf'></Intl>}/>
+                            <UF name="ufExpedicao" label={<Intl str='uf'></Intl>}/>
                         </Col>
-                      </Row>
+                    </Row>
 
-                      <Endereco zipcodeParams={{ form: "ProfileForm", callback: this.atualizaEndereco }}/>
+                    <Endereco zipcodeParams={{ form: "ProfileForm", callback: this.atualizaEndereco }}/>
 
-                  </CardBody>
-                </Card>
+                    <Row>
+                        <Col xs={12} md={4}>
+                            <Select name="curso" label={<Intl str='curso'></Intl>} 
+                                options={this.state.cursos} undefinedOption={true}
+                                onChange={this.onCursoChange} required={true}/>
+                        </Col>
+                        {this.state.showOutros && 
+                            <Col xs={12} md={8}>
+                                <Text name="outroCurso" label={<Intl str='outro-curso'></Intl>} required={true}/>
+                            </Col>
+                        }
+                    </Row>
+                </CardBody>
+            </Card>
 
-                <FieldArray name="telefones" component={renderPhones} />
-                <FieldArray name="emails" component={renderEmails} />
+            <FieldArray name="telefones" component={renderPhones} />
+            <FieldArray name="emails" component={renderEmails} />
 
-                <Button type="submit" color="primary" disabled={invalid || submitting}><Intl str='salvar'></Intl></Button>
-                <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)}><Intl str='limpar'></Intl></Button>
+            <Button type="submit" color="primary" disabled={invalid || submitting}><Intl str='salvar'></Intl></Button>
+            <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)}><Intl str='limpar'></Intl></Button>
 
-            </Form>
+        </Form>
         );
     }
 
@@ -176,19 +202,22 @@ class ProfileForm extends Component {
 
 const validate = values => {
     const errors = {};
-    if(values.telefones && values.telefones.length < 1) {
+    if(!values.telefones || values.telefones.length < 1) {
         errors.telefones = [];
         errors.telefones._error = translate("telefone-obrigatorio");
     }
 
-    if(values.emails && values.emails.length < 1) {
+    if(!values.emails || values.emails.length < 1) {
         errors.emails = [];
         errors.emails._error = translate("email-obrigatorio");
     }
     return errors;
 }
 
-ProfileForm = reduxForm({ form: "ProfileForm", validate })(ProfileForm);
+ProfileForm = reduxForm({ 
+    form: "ProfileForm", 
+    validate
+})(ProfileForm);
 
 const mapStateToProps = (state) => {
     return {

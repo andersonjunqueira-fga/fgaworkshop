@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { translate } from './Intl.actions';
 
+export const DEFAULT_LANGUAGE = "br";
+
 class Intl extends Component {
     render() {
       const t = translate;

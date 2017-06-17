@@ -7,7 +7,7 @@ import axios from "axios";
 import App from './app/App';
 import reducers from './app/App.reducers';
 
-import { changeLanguage } from './components/Intl/Intl.actions';
+import { changeLanguage, DEFAULT_LANGUAGE } from './components/Intl/Intl.actions';
 
 import appData from './app.json';
 
@@ -15,8 +15,6 @@ const store = createStore(
     reducers,
     applyMiddleware(thunk)
 );
-
-const DEFAULT_LANGUAGE = "br";
 
 // INTERNACIONALIZAÇÃO
 store.dispatch(changeLanguage(DEFAULT_LANGUAGE, true));

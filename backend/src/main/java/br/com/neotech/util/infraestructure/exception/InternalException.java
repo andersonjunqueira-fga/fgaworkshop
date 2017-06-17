@@ -11,7 +11,7 @@ package br.com.neotech.util.infraestructure.exception;
  * @see <a href="https://httpstatuses.com/">https://httpstatuses.com/</a>
  * @since 1.0.0
  */
-public abstract class BaseException extends Exception {
+public class InternalException extends RuntimeException {
 
     private static final long serialVersionUID = 7750277264481007108L;
 
@@ -19,7 +19,7 @@ public abstract class BaseException extends Exception {
      * Construtor padrão da exceção.
      * @param statusCode código de erro HTTP
      */
-    public BaseException() {
+    public InternalException() {
         super();
     }
 
@@ -28,7 +28,7 @@ public abstract class BaseException extends Exception {
      * @param statusCode código de erro HTTP
      * @param msg mensagem do erro
      */
-    public BaseException(String msg) {
+    public InternalException(String msg) {
         super(msg);
     }
 
@@ -37,7 +37,7 @@ public abstract class BaseException extends Exception {
      * @param statusCode código de erro HTTP
      * @param cause causa origem da exceção lançada
      */
-    public BaseException(Throwable cause) {
+    public InternalException(Throwable cause) {
         super(cause);
     }
 
@@ -47,7 +47,7 @@ public abstract class BaseException extends Exception {
      * @param msg mensagem do erro
      * @param cause causa origem da exceção lançada
      */
-    public BaseException(String msg, Throwable cause) {
+    public InternalException(String msg, Throwable cause) {
         super(msg, cause);
     }
 
