@@ -2,7 +2,6 @@
     "title": "FGA Workshop", 
     "subtitle": "FGA Workshop",
     "config": {
-        "keycloakConfigFile": "/keycloak-dev.json",
         "axiosBaseURL": "http://localhost:8000/fgaworkshop/api"
     },
 

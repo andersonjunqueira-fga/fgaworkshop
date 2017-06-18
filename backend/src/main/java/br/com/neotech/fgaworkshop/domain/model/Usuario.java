@@ -3,11 +3,12 @@ package br.com.neotech.fgaworkshop.domain.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "TB_USUARIO")
 public class Usuario {
 
     public static final int MAX_LENGTH_NOME = 100;
@@ -29,65 +30,65 @@ public class Usuario {
     public static final int MAX_LENGTH_CURSO = 30;
 
     @Id
-    @Column(name="id")
-    @GeneratedValue
+    @Column(name="ID_USUARIO", columnDefinition = "serial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="nome", length=MAX_LENGTH_NOME)
+    @Column(name="NOME", length=MAX_LENGTH_NOME)
     private String nome;
 
-    @Column(name="cpf", length=MAX_LENGTH_CPF)
+    @Column(name="CPF", length=MAX_LENGTH_CPF)
     private String cpf;
 
-    @Column(name="rg", length=MAX_LENGTH_RG)
+    @Column(name="RG", length=MAX_LENGTH_RG)
     private String rg;
 
-    @Column(name="orgaoExpedidor", length=MAX_LENGTH_ORGAO_EXPEDIDOR)
+    @Column(name="ORGAO_EXPEDIDOR", length=MAX_LENGTH_ORGAO_EXPEDIDOR)
     private String orgaoExpedidor;
 
-    @Column(name="ufDocumento", length=MAX_LENGTH_UF)
+    @Column(name="UF_DOCUMENTO", length=MAX_LENGTH_UF)
     private String ufDocumento;
 
-    @Column(name="curso", length=MAX_LENGTH_CURSO)
+    @Column(name="CURSO", length=MAX_LENGTH_CURSO)
     private String curso;
 
-    @Column(name="outro_curso", length=MAX_LENGTH_CURSO)
+    @Column(name="OUTRO_CURSO", length=MAX_LENGTH_CURSO)
     private String outroCurso;
 
-    @Column(name="logradouro", length=MAX_LENGTH_LOGRADOURO)
+    @Column(name="LOGRADOURO", length=MAX_LENGTH_LOGRADOURO)
     private String logradouro;
 
-    @Column(name="complemento", length=MAX_LENGTH_COMPLEMENTO)
+    @Column(name="COMPLEMENTO", length=MAX_LENGTH_COMPLEMENTO)
     private String complemento;
 
-    @Column(name="numero", length=MAX_LENGTH_NUMERO)
+    @Column(name="NUMERO", length=MAX_LENGTH_NUMERO)
     private String numero;
 
-    @Column(name="cep", length=MAX_LENGTH_CEP)
+    @Column(name="CEP", length=MAX_LENGTH_CEP)
     private String cep;
 
-    @Column(name="bairro", length=MAX_LENGTH_BAIRRO)
+    @Column(name="BAIRRO", length=MAX_LENGTH_BAIRRO)
     private String bairro;
 
-    @Column(name="cidade", length=MAX_LENGTH_CIDADE)
+    @Column(name="CIDADE", length=MAX_LENGTH_CIDADE)
     private String cidade;
 
-    @Column(name="uf", length=MAX_LENGTH_UF)
+    @Column(name="UF", length=MAX_LENGTH_UF)
     private String uf;
 
-    @Column(name="pais", length=MAX_LENGTH_PAIS)
+    @Column(name="PAIS", length=MAX_LENGTH_PAIS)
     private String pais;
 
-    @Column(name="telefone", length=MAX_LENGTH_TELEFONE)
+    @Column(name="TELEFONE", length=MAX_LENGTH_TELEFONE)
     private String telefone;
 
-    @Column(name="email", unique=true, length=MAX_LENGTH_EMAIL)
+    @Column(name="EMAIL", unique=true, length=MAX_LENGTH_EMAIL)
     private String email;
 
-    @Column(name="login", length=MAX_LENGTH_LOGIN)
+    @Column(name="LOGIN", length=MAX_LENGTH_LOGIN)
     private String login;
 
-    @Column(name="language", length=MAX_LENGTH_LANGUAGE)
+    @Column(name="LANGUAGE", length=MAX_LENGTH_LANGUAGE)
     private String language;
 
     public Long getId() {

@@ -7,21 +7,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ESTADO")
+@Table(name = "TB_UF")
 public class Estado {
 
     public static final int MAX_LENGTH_SIGLA = 2;
     public static final int MAX_LENGTH_NOME = 30;
 
     @Id
-    @Column(name="codigo_ibge")
+    @Column(name="ID_UF")
     @GeneratedValue
     private Long id;
 
-    @Column(name="sigla", length=MAX_LENGTH_SIGLA)
+    @Column(name="SIGLA", length=MAX_LENGTH_SIGLA)
     private String sigla;
 
-    @Column(name="nome", length=MAX_LENGTH_NOME)
+    @Column(name="NOME", length=MAX_LENGTH_NOME)
     private String nome;
 
     public Long getId() {
