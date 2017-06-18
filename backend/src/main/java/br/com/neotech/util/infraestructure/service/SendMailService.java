@@ -16,7 +16,7 @@ public class SendMailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void enviar(String from, String assunto, String mensagem, String... destinatarios) throws EmailException {
+    public void enviar(String fromName, String from, String assunto, String mensagem, String... destinatarios) throws EmailException {
 
         InternetAddress[] dests = new InternetAddress[destinatarios.length];
         for(int i=0; i<destinatarios.length; i++) {
@@ -28,17 +28,17 @@ public class SendMailService {
             }
 
         }
-        enviar(from, assunto, mensagem, dests);
+        enviar(fromName, from, assunto, mensagem, dests);
 
     }
 
-    public void enviar(String from, String assunto, String mensagem, InternetAddress... destinatarios) throws EmailException {
+    public void enviar(String fromName, String from, String assunto, String mensagem, InternetAddress... destinatarios) throws EmailException {
 
         MimeMessage mail = mailSender.createMimeMessage();
         try {
 
             MimeMessageHelper helper = new MimeMessageHelper(mail, true, "UTF-8");
-            helper.setFrom(from);
+            helper.setFrom(new InternetAddress(from, fromName));
             helper.setTo(destinatarios);
             helper.setSubject(assunto);
             helper.setText("", mensagem);

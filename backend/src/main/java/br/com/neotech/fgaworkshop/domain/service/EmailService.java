@@ -22,6 +22,7 @@ public class EmailService extends SendMailService {
         try {
 
             enviar(
+                env.getProperty("fgaworkflow.mail.fromName"),
                 env.getProperty("fgaworkflow.mail.from"),
                 env.getProperty("fgaworkflow.mail.cadastro.subject"),
 
