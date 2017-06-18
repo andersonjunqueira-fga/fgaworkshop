@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.neotech.fgaworkshop.domain.model.Usuario;
 import br.com.neotech.fgaworkshop.infraestructure.persistence.jpa.UsuarioRepository;
+import br.com.neotech.util.infraestructure.exception.EmailException;
 import br.com.neotech.util.infraestructure.exception.NegocioException;
 import br.com.neotech.util.infraestructure.service.RestFullService;
 
@@ -15,6 +16,9 @@ public class UsuarioService extends RestFullService<Usuario, Long> {
 
     @Autowired
     private UsuarioRepository rep;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     UsuarioService(UsuarioRepository repository) {
@@ -30,7 +34,44 @@ public class UsuarioService extends RestFullService<Usuario, Long> {
 
         List<Usuario> usuariosBanco = rep.findByCpfOrEmail(usuario.getCpf(), usuario.getEmail());
         if(usuariosBanco == null || usuariosBanco.isEmpty()) {
-            return super.save(usuario);
+            Usuario saida = super.save(usuario);
+
+            try {
+                String curso = null;
+                switch(usuario.getCurso()) {
+                    case "auto":
+                        curso = "Engenharia Automotiva";
+                        break;
+
+                    case "aero":
+                        curso = "Engenharia Aeroespacial";
+                        break;
+
+                    case "soft":
+                        curso = "Engenharia de Software";
+                        break;
+
+                    case "ener":
+                        curso = "Engenharia de Energia";
+                        break;
+
+                    case "elet":
+                        curso = "Engenharia Eletrônica";
+                        break;
+
+                    default:
+                        curso = usuario.getOutroCurso();
+                }
+
+                String cpf = usuario.getCpf().replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+
+                emailService.enviarUsuarioCadastrado(usuario.getNome(), usuario.getEmail(), cpf, curso);
+
+                return saida;
+
+            } catch(EmailException ex) {
+                throw new NegocioException("email-nao-enviado", ex);
+            }
 
         } else {
 

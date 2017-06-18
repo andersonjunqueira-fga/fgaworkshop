@@ -5,6 +5,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
@@ -41,6 +42,7 @@ public class SendMailService {
             helper.setTo(destinatarios);
             helper.setSubject(assunto);
             helper.setText("", mensagem);
+            helper.addInline("logo", new ClassPathResource("/img/logo-email.png"));
 
         } catch (Exception e) {
             throw new EmailException("Erro na preparação do e-mail", e);

@@ -18,15 +18,16 @@ public class EmailService extends SendMailService {
     @Autowired
     private Environment env;
 
-    public void enviarUsuarioCadastrado(String nome, String email) throws EmailException {
-
+    public void enviarUsuarioCadastrado(String nome, String email, String cpf, String curso) throws EmailException {
         try {
 
             enviar(
                 env.getProperty("fgaworkflow.mail.from"),
                 env.getProperty("fgaworkflow.mail.cadastro.subject"),
-                MessageFormat.format(env.getProperty("fgaworkflow.mail.cadastro.message"), new Object[] { nome }),
-                new InternetAddress(email, nome)
+
+                MessageFormat.format(env.getProperty("fgaworkflow.mail.cadastro.message"), new Object[] { nome, cpf, curso }),
+
+                    new InternetAddress(email, nome)
             );
 
         } catch (UnsupportedEncodingException e) {

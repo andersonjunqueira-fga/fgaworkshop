@@ -21,6 +21,7 @@
         "email": "e-mail",
         "email-obrigatorio": "É necessário informar ao menos 1 e-mail.",
         "email-duplicado": "Não foi possível continuar, esse e-mail já está registrado.",
+        "email-nao-enviado": "Não foi possível enviar o e-mail de confirmação. Seu registro não foi efetuado.",
         "emails": "e-mails",
         "eng-aeroespacial": "Engenharia Aeroespacial",
         "eng-automotiva": "Engenharia Automotiva",
