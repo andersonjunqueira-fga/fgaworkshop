@@ -17,88 +17,6 @@ import { toaster } from "../../app/Notification.actions";
 import { translate } from "../../components/Intl/Intl.actions";
 import { saveProfile } from "./ProfileForm.actions";
 
-class renderPhones extends Component {
-    render() {
-        const phoneTypes = [
-            {value: "", text: translate("selecione")},
-            {value: "com", text: translate("comercial")},
-            {value: "res", text: translate("residencial")},
-            {value: "cel", text: translate("celular")}
-        ];
-        const { fields, meta } = this.props; 
-        return (
-            <Card>
-                <CardHeader>
-                    <Intl str='telefones'></Intl> 
-                    <Button type="button" color="secondary" className="pull-right" size="sm" onClick={() => fields.push()}>
-                        <Intl str='adicionar-telefone'></Intl>
-                    </Button>
-                </CardHeader>
-                <CardBody>
-                    {fields.map((field, index) => {
-                        return (
-                            <Row key={index}>
-                                <Col xs={6} md={4}>
-                                    <Phone name={`${field}.numero`} label={<Intl str='telefone'></Intl>} maxLength={15}/>
-                                </Col>
-                                <Col xs={4} md={3}>
-                                    <Select name={`${field}.tipo`} options={phoneTypes} label={<Intl str='tipo'></Intl>}/>
-                                </Col>
-                                <Col xs={2} md={1}>
-                                    <a className="btn btn-danger fields-remove-button" onClick={() => { fields.remove(index); } }>
-                                      <i className="fa fa-trash"></i>
-                                    </a>
-                                </Col>
-                            </Row>
-                        );
-                    })}
-                    {meta.error && <span className="fields-error">{meta.error}</span>}
-                </CardBody>
-            </Card>   
-        );
-    }
-}
-
-class renderEmails extends Component {
-    render() {
-        const principalTypes = [
-            {value: true, text: translate("sim")},
-            {value: false, text: translate("nao")}
-        ];
-        const { fields, meta } = this.props; 
-        return (
-            <Card>
-                <CardHeader>
-                    <Intl str='emails'></Intl> 
-                    <Button type="button" color="secondary" className="pull-right" size="sm" onClick={() => fields.push()}>
-                        <Intl str='adicionar-email'></Intl>
-                    </Button>
-                </CardHeader>
-                <CardBody>
-                    {fields.map((field, index) => {
-                        return (
-                            <Row key={index}>
-                                <Col xs={6} md={4}>
-                                    <Email name={`${field}.email`} label={<Intl str='email'></Intl>} maxLength={100}/>
-                                </Col>
-                                <Col xs={4} md={3}>
-                                    <Select name={`${field}.principal`} options={principalTypes} label={<Intl str='principal'></Intl>}/>
-                                </Col>
-                                <Col xs={2} md={1}>
-                                    <a className="btn btn-danger fields-remove-button" onClick={() => { fields.remove(index); } }>
-                                      <i className="fa fa-trash"></i>
-                                    </a>
-                                </Col>
-                            </Row>
-                        );
-                    })}
-                    {meta.error && <span className="fields-error">{meta.error}</span>}
-                </CardBody>
-            </Card>
-        );
-    }
-}
-
 class ProfileForm extends Component {
 
     constructor(props) {
@@ -138,7 +56,7 @@ class ProfileForm extends Component {
     }
 
     onCursoChange(event, newValue, previousValue) {
-        this.setState(Object.assign(this.state, { showOutros: newValue == "outro" }));
+        this.setState(Object.assign(this.state, { showOutros: newValue === "outro" }));
     }
 
     render() {
@@ -158,7 +76,7 @@ class ProfileForm extends Component {
 
                     <Row>
                         <Col xs={12} md={3}>
-                            <CPF name="cpf" label={<Intl str='cpf'></Intl>} />
+                            <CPF name="cpf" label={<Intl str='cpf'></Intl>} required={true}/>
                         </Col>
                         <Col xs={12} md={3}>
                             <Text name="rg" label={<Intl str='rg'></Intl>} maxLength={20}/>
@@ -171,7 +89,14 @@ class ProfileForm extends Component {
                         </Col>
                     </Row>
 
-                    <Endereco zipcodeParams={{ form: "ProfileForm", callback: this.atualizaEndereco }}/>
+                    <Row>
+                        <Col xs={12} md={4}>
+                            <Phone name="telefone" label={<Intl str='telefone'></Intl>} required={true}/>
+                        </Col>
+                        <Col xs={6} md={8}>
+                            <Email name="email" label={<Intl str='email'></Intl>} required={true}/>
+                        </Col>
+                    </Row>
 
                     <Row>
                         <Col xs={12} md={4}>
@@ -185,11 +110,11 @@ class ProfileForm extends Component {
                             </Col>
                         }
                     </Row>
+
+                    <Endereco zipcodeParams={{ form: "ProfileForm", callback: this.atualizaEndereco }}/>
+
                 </CardBody>
             </Card>
-
-            <FieldArray name="telefones" component={renderPhones} />
-            <FieldArray name="emails" component={renderEmails} />
 
             <Button type="submit" color="primary" disabled={invalid || submitting}><Intl str='salvar'></Intl></Button>
             <Button type="button" disabled={pristine || submitting} onClick={() => this.props.dispatch(reset)}><Intl str='limpar'></Intl></Button>
@@ -202,15 +127,6 @@ class ProfileForm extends Component {
 
 const validate = values => {
     const errors = {};
-    if(!values.telefones || values.telefones.length < 1) {
-        errors.telefones = [];
-        errors.telefones._error = translate("telefone-obrigatorio");
-    }
-
-    if(!values.emails || values.emails.length < 1) {
-        errors.emails = [];
-        errors.emails._error = translate("email-obrigatorio");
-    }
     return errors;
 }
 

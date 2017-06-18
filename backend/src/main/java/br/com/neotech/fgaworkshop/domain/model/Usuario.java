@@ -1,13 +1,9 @@
 package br.com.neotech.fgaworkshop.domain.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +24,9 @@ public class Usuario {
     public static final int MAX_LENGTH_UF = 2;
     public static final int MAX_LENGTH_PAIS = 30;
     public static final int MAX_LENGTH_LANGUAGE = 10;
+    public static final int MAX_LENGTH_TELEFONE = 15;
+    public static final int MAX_LENGTH_EMAIL = 100;
+    public static final int MAX_LENGTH_CURSO = 30;
 
     @Id
     @Column(name="id")
@@ -48,6 +47,12 @@ public class Usuario {
 
     @Column(name="ufDocumento", length=MAX_LENGTH_UF)
     private String ufDocumento;
+
+    @Column(name="curso", length=MAX_LENGTH_CURSO)
+    private String curso;
+
+    @Column(name="outro_curso", length=MAX_LENGTH_CURSO)
+    private String outroCurso;
 
     @Column(name="logradouro", length=MAX_LENGTH_LOGRADOURO)
     private String logradouro;
@@ -73,19 +78,17 @@ public class Usuario {
     @Column(name="pais", length=MAX_LENGTH_PAIS)
     private String pais;
 
+    @Column(name="telefone", length=MAX_LENGTH_TELEFONE)
+    private String telefone;
+
+    @Column(name="email", unique=true, length=MAX_LENGTH_EMAIL)
+    private String email;
+
     @Column(name="login", length=MAX_LENGTH_LOGIN)
     private String login;
 
     @Column(name="language", length=MAX_LENGTH_LANGUAGE)
     private String language;
-
-    @OneToMany
-    @JoinColumn(name="id_usuario", referencedColumnName="id")
-    private List<Telefone> telefones;
-
-    @OneToMany
-    @JoinColumn(name="id_usuario", referencedColumnName="id")
-    private List<Email> emails;
 
     public Long getId() {
         return id;
@@ -167,22 +170,6 @@ public class Usuario {
         this.pais = pais;
     }
 
-    public List<Telefone> getTelefones() {
-        return telefones;
-    }
-
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
-    }
-
-    public List<Email> getEmails() {
-        return emails;
-    }
-
-    public void setEmails(List<Email> emails) {
-        this.emails = emails;
-    }
-
     public String getLogin() {
         return login;
     }
@@ -229,6 +216,38 @@ public class Usuario {
 
     public void setUfDocumento(String ufDocumento) {
         this.ufDocumento = ufDocumento;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public String getOutroCurso() {
+        return outroCurso;
+    }
+
+    public void setOutroCurso(String outroCurso) {
+        this.outroCurso = outroCurso;
     }
 
 }

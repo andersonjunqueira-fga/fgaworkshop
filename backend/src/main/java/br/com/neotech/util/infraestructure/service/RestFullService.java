@@ -7,8 +7,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.neotech.util.infraestructure.exception.NegocioException;
-
 public class RestFullService<E, PK extends Serializable> {
 
     private Class<E> modelClass;
@@ -27,26 +25,21 @@ public class RestFullService<E, PK extends Serializable> {
         loadTypes();
     }
 
-    public List<E> findAll() throws NegocioException  {
+    public List<E> findAll() {
         return repository.findAll();
     }
 
-    public E findById(PK id) throws NegocioException  {
+    public E findById(PK id) {
         return repository.findOne(id);
     }
 
     @Transactional
-    public void delete(PK id) throws NegocioException  {
+    public void delete(PK id) {
         repository.delete(id);
     }
 
     @Transactional
-    public E create(E e) throws NegocioException {
-        return repository.save(e);
-    }
-
-    @Transactional
-    public E update(E e) throws NegocioException  {
+    public E save(E e) {
         return repository.save(e);
     }
 

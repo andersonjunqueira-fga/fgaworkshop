@@ -11,7 +11,7 @@ package br.com.neotech.util.infraestructure.exception;
  * @see <a href="https://httpstatuses.com/">https://httpstatuses.com/</a>
  * @since 1.0.0
  */
-public class NegocioException extends GeneralException {
+public class GeneralException extends RuntimeException {
 
     private static final long serialVersionUID = 7750277264481007108L;
 
@@ -19,7 +19,7 @@ public class NegocioException extends GeneralException {
      * Construtor padrão da exceção.
      * @param statusCode código de erro HTTP
      */
-    public NegocioException() {
+    public GeneralException() {
         super();
     }
 
@@ -28,7 +28,7 @@ public class NegocioException extends GeneralException {
      * @param statusCode código de erro HTTP
      * @param msg mensagem do erro
      */
-    public NegocioException(String msg) {
+    public GeneralException(String msg) {
         super(msg);
     }
 
@@ -37,7 +37,7 @@ public class NegocioException extends GeneralException {
      * @param statusCode código de erro HTTP
      * @param cause causa origem da exceção lançada
      */
-    public NegocioException(Throwable cause) {
+    public GeneralException(Throwable cause) {
         super(cause);
     }
 
@@ -47,7 +47,7 @@ public class NegocioException extends GeneralException {
      * @param msg mensagem do erro
      * @param cause causa origem da exceção lançada
      */
-    public NegocioException(String msg, Throwable cause) {
+    public GeneralException(String msg, Throwable cause) {
         super(msg, cause);
     }
 

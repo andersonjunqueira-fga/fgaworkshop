@@ -3,6 +3,7 @@ package br.com.neotech.fgaworkshop.interfaces.web;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,7 @@ import br.com.neotech.fgaworkshop.domain.service.ZipCodeService;
 import br.com.neotech.fgaworkshop.infraestructure.dto.ZipCodeDTO;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/zipcodes")
 public class ZipCodeRest {
 

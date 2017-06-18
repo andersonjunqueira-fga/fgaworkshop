@@ -26,14 +26,6 @@ insert into estado (codigo_ibge,sigla,nome) Values(28,'SE','Sergipe');
 insert into estado (codigo_ibge,sigla,nome) Values(35,'SP','São Paulo');
 insert into estado (codigo_ibge,sigla,nome) Values(17,'TO','Tocantins');
 
-insert into usuario (id, nome, logradouro, complemento, numero, cep, bairro, cidade, uf, pais, login, language) 
-values (1, 'NOME DO USUÁRIO', 'UM ENDEREÇO QUALQUER', 'CASA', '10', '70735110', 'ASA NORTE', 'BRASÍLIA', 'DF', 'BRASIL', 'anderson.junqueira@gmail.com', 'br');
+insert into usuario (id, nome, logradouro, complemento, numero, cep, bairro, cidade, uf, pais, login, language, email) 
+values (1, 'NOME DO USUÁRIO', 'UM ENDEREÇO QUALQUER', 'CASA', '10', '70735110', 'ASA NORTE', 'BRASÍLIA', 'DF', 'BRASIL', 'anderson.junqueira@gmail.com', 'pt-BR', 'anderson.junqueira@gmail.com');
 
-insert into telefone(id, id_usuario, numero, tipo)
-values (1, 1, '61955551010', 'cel');
-
-insert into telefone(id, id_usuario, numero, tipo)
-values (2, 1, '6155551012', 'res');
-
-insert into email(id, id_usuario, email, principal)
-values (1, 1, 'anderson.junqueira@gmail.com', 1);
