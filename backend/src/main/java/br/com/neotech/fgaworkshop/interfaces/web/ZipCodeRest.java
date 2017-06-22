@@ -14,7 +14,7 @@ import br.com.neotech.fgaworkshop.infraestructure.dto.ZipCodeDTO;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/zipcodes")
+@RequestMapping("/fgaworkshop/api/zipcodes")
 public class ZipCodeRest {
 
     private final ZipCodeService service;

@@ -19,7 +19,7 @@ import br.com.neotech.util.infraestructure.web.RestFullEndpoint;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/usuarios")
+@RequestMapping("/fgaworkshop/api/usuarios")
 public class UsuariosRest extends RestFullEndpoint<Usuario, Long> {
 
     @Autowired
