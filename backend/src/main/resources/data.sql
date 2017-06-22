@@ -1,3 +1,4 @@
+/*
 insert into TB_UF(ID_UF, SIGLA, NOME) Values(12,'AC','Acre');  
 insert into TB_UF(ID_UF, SIGLA, NOME) Values(27,'AL','Alagoas');  
 insert into TB_UF(ID_UF, SIGLA, NOME) Values(13,'AM','Amazonas');
@@ -25,3 +26,4 @@ insert into TB_UF(ID_UF, SIGLA, NOME) Values(42,'SC','Santa Catarina');
 insert into TB_UF(ID_UF, SIGLA, NOME) Values(28,'SE','Sergipe');
 insert into TB_UF(ID_UF, SIGLA, NOME) Values(35,'SP','São Paulo');
 insert into TB_UF(ID_UF, SIGLA, NOME) Values(17,'TO','Tocantins');
+*/
