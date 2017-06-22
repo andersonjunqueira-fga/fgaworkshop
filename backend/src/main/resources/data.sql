@@ -1,6 +1,3 @@
-delete from TB_UF;  
-delete from TB_USUARIO;
-
 insert into TB_UF(ID_UF, SIGLA, NOME) Values(12,'AC','Acre');  
 insert into TB_UF(ID_UF, SIGLA, NOME) Values(27,'AL','Alagoas');  
 insert into TB_UF(ID_UF, SIGLA, NOME) Values(13,'AM','Amazonas');

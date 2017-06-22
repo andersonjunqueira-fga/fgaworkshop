@@ -2,7 +2,7 @@
     "title": "FGA Workshop", 
     "subtitle": "FGA Workshop",
     "config": {
-        "axiosBaseURL": "http://localhost:8000/fgaworkshop/api"
+        "axiosBaseURL": "https://backend.lappis.rocks/fgaworkshop/api"
     },
 
     "userMenu": [
