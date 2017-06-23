@@ -33,7 +33,7 @@ public class EstadosRestTest extends BaseRestTest {
 
         HttpEntity<?> e = new HttpEntity<Object>(headers);
 
-        ResponseEntity<String> entity = restTemplate.exchange("/estados", HttpMethod.GET, e, String.class);
+        ResponseEntity<String> entity = restTemplate.exchange("/fgaworkshop/api/estados", HttpMethod.GET, e, String.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         List<?> l = JsonSerialization.readValue(entity.getBody(), List.class);

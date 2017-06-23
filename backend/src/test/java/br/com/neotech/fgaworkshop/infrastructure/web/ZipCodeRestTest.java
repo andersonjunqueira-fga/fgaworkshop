@@ -32,7 +32,7 @@ public class ZipCodeRestTest extends BaseRestTest {
 
         HttpEntity<?> e = new HttpEntity<Object>(headers);
 
-        ResponseEntity<String> entity = restTemplate.exchange("/zipcodes/71505220", HttpMethod.GET, e, String.class);
+        ResponseEntity<String> entity = restTemplate.exchange("/fgaworkshop/api/zipcodes/71505220", HttpMethod.GET, e, String.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         ZipCodeDTO z = JsonSerialization.readValue(entity.getBody(), ZipCodeDTO.class);

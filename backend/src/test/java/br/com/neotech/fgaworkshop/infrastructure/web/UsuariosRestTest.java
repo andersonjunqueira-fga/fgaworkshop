@@ -33,7 +33,7 @@ public class UsuariosRestTest extends BaseRestTest {
 
         HttpEntity<?> e = new HttpEntity<Object>(headers);
 
-        ResponseEntity<String> entity = restTemplate.exchange("/usuarios", HttpMethod.GET, e, String.class);
+        ResponseEntity<String> entity = restTemplate.exchange("/fgaworkshop/api/usuarios", HttpMethod.GET, e, String.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         List<?> usuarios = JsonSerialization.readValue(entity.getBody(), List.class);
