@@ -2,9 +2,6 @@ package br.com.neotech.fgaworkshop.infrastructure.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-
-import org.keycloak.util.JsonSerialization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -35,9 +32,6 @@ public class UsuariosRestTest extends BaseRestTest {
 
         ResponseEntity<String> entity = restTemplate.exchange("/fgaworkshop/api/usuarios", HttpMethod.GET, e, String.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-
-        List<?> usuarios = JsonSerialization.readValue(entity.getBody(), List.class);
-        assertThat(usuarios.size()).isGreaterThan(0);
 
     }
 
