@@ -6,7 +6,7 @@ ALTER USER fgaworkshopusr WITH SUPERUSER;
 drop table TB_UF;
 drop table TB_USUARIO;
 
-create sequence fgaworkshop.hibernate_sequence;
+create sequence SEQ_USUARIO;
 
 /*==============================================================*/
 /* Table: TB_UF                                                 */
